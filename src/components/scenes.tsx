@@ -7,6 +7,13 @@ import {
   Box,
 } from "lucide-react";
 import type { CSSProperties } from "react";
+import { ModelPreview } from "./three/model-preview";
+import { coffeeReview, coffeeReviewEnabled } from "@/lib/coffee-review";
+import {
+  approvedAssets,
+  coffeeLights,
+  previewCameras,
+} from "@/lib/model-preview";
 import highlands from "../../public/media/highlands.webp";
 import ibexReference from "../../public/media/ibex-reference.webp";
 import { contactUrl, exhibitionCopy } from "@/lib/exhibition";
@@ -104,7 +111,15 @@ export function LandmarkScene({
   copy: Copy;
 }) {
   const { id, title, category, description } = chapter;
-  const slot = landmarkSlots[id];
+  const modelPath = approvedAssets[id];
+  const plate = (
+    <div className="stage-plate">
+      <span className="stage-reticle" aria-hidden="true" />
+      {id === "ibex" && (
+        <IbexReference description={copy.ibexImageDescription} />
+      )}
+    </div>
+  );
   return (
     <section
       id={id}
@@ -123,17 +138,30 @@ export function LandmarkScene({
         </div>
         <figure
           className="asset-stage"
-          data-model-state={slot.modelPath ? "available" : "pending"}
+          data-model-state={modelPath ? "available" : "pending"}
         >
-          <div className="stage-plate">
-            <span className="stage-reticle" aria-hidden="true" />
-            {id === "ibex" && (
-              <IbexReference description={copy.ibexImageDescription} />
-            )}
-          </div>
+          {modelPath ? (
+            <ModelPreview
+              labels={copy.preview}
+              scene={{
+                kind: id === "ibex" ? "ibex" : "architecture",
+                path: modelPath,
+                camera: previewCameras[id],
+                lights: landmarkSlots[id].lights,
+              }}
+            >
+              {plate}
+            </ModelPreview>
+          ) : (
+            plate
+          )}
           <figcaption className="stage-caption eyebrow">
             <Box size={15} strokeWidth={1.5} aria-hidden="true" />
-            {id === "ibex" ? copy.heroPlaceholder : copy.placeholder}
+            {modelPath
+              ? copy.preview.caption
+              : id === "ibex"
+                ? copy.heroPlaceholder
+                : copy.placeholder}
           </figcaption>
         </figure>
       </div>
@@ -158,6 +186,39 @@ function beanStyles(bean: CoffeeObject) {
 }
 
 export function CoffeeScene({ copy }: { copy: Copy }) {
+  const review = coffeeReviewEnabled();
+  const paths = review
+    ? {
+        "bean-a": coffeeReview["bean-a"].model,
+        "bean-b": coffeeReview["bean-b"].model,
+      }
+    : approvedAssets.coffee;
+  const canPreview = paths && paths["bean-a"] !== paths["bean-b"];
+  const plate = (
+    <div className="coffee-plate" aria-hidden="true">
+      {coffeeObjects.map((bean) => (
+        <div
+          className="bean-position"
+          data-bean={bean.id}
+          key={bean.id}
+          style={beanStyles(bean)}
+        >
+          {review ? (
+            <Image
+              src={coffeeReview[bean.id].poster}
+              alt=""
+              fill
+              unoptimized
+              sizes="(max-width: 48rem) 35vw, 15vw"
+              className="bean-poster"
+            />
+          ) : (
+            <div className="bean" />
+          )}
+        </div>
+      ))}
+    </div>
+  );
   return (
     <section
       id="coffee"
@@ -174,22 +235,45 @@ export function CoffeeScene({ copy }: { copy: Copy }) {
           <h2 id="coffee-title">{copy.coffee.title}</h2>
           <p className="chapter-description">{copy.coffee.description}</p>
         </div>
-        <figure className="coffee-stage">
-          <div className="coffee-plate" aria-hidden="true">
-            {coffeeObjects.map((bean) => (
-              <div
-                className="bean-position"
-                data-bean={bean.id}
-                key={bean.id}
-                style={beanStyles(bean)}
-              >
-                <div className="bean" />
-              </div>
-            ))}
-          </div>
+        <figure
+          className="coffee-stage"
+          data-model-state={
+            review ? "review" : canPreview ? "available" : "pending"
+          }
+        >
+          {canPreview ? (
+            <ModelPreview
+              labels={copy.preview}
+              scene={{
+                kind: "coffee",
+                camera: previewCameras.coffee,
+                lights: coffeeLights,
+                beans: [
+                  {
+                    path: paths["bean-a"],
+                    transform: coffeeObjects[0],
+                    motionEnabled: true,
+                  },
+                  {
+                    path: paths["bean-b"],
+                    transform: coffeeObjects[1],
+                    motionEnabled: true,
+                  },
+                ],
+              }}
+            >
+              {plate}
+            </ModelPreview>
+          ) : (
+            plate
+          )}
           <figcaption className="stage-caption eyebrow">
             <Box size={15} strokeWidth={1.5} aria-hidden="true" />
-            {copy.coffee.placeholder}
+            {canPreview
+              ? review
+                ? copy.preview.coffeeReview
+                : copy.preview.caption
+              : copy.coffee.placeholder}
           </figcaption>
         </figure>
       </div>

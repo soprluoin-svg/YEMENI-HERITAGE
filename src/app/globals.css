@@ -799,3 +799,77 @@ main:focus {
     scroll-behavior: auto;
   }
 }
+
+.model-viewport {
+  position: relative;
+}
+
+.model-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.model-canvas-host {
+  width: 100%;
+  height: 100%;
+}
+
+.model-viewport[data-preview-status="ready"] .model-canvas {
+  opacity: 1;
+}
+
+.model-viewport[data-preview-status="ready"]
+  .model-poster
+  :is(.stage-reticle, .ibex-reference, .bean-position) {
+  opacity: 0;
+}
+
+.model-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 0.5rem 0.9rem;
+  border-block-start: 1px solid
+    color-mix(in srgb, currentColor 28%, transparent);
+}
+
+.model-controls button {
+  min-height: 44px;
+  padding-inline: 0.7rem;
+  border: 1px solid currentColor;
+  cursor: pointer;
+}
+
+.model-controls button:hover {
+  text-decoration: underline;
+}
+
+.model-controls [role="status"] {
+  font-size: 0.875rem;
+}
+
+.bean-poster {
+  object-fit: contain;
+  scale: 1.25;
+}
+
+.bean-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0 0.35rem 0.35rem;
+}
+
+.bean-controls legend {
+  font-size: 0.875rem;
+  margin-block-end: 0.35rem;
+}
+
+.bean-controls [aria-pressed="true"] {
+  background: var(--warm-ivory);
+  color: var(--deep-espresso);
+}

@@ -1,19 +1,17 @@
-type Vector3 = readonly [x: number, y: number, z: number];
+export type Vector3 = readonly [x: number, y: number, z: number];
 
-type LightRig = {
+export type LightRig = {
   ambient: number;
   key: { color: string; position: Vector3; intensity: number };
   fill: { color: string; position: Vector3; intensity: number };
 };
 
 type LandmarkSlot = {
-  modelPath: `/models/${string}.glb` | null;
   lights: LightRig;
 };
 
 export const landmarkSlots = {
   ibex: {
-    modelPath: null,
     lights: {
       ambient: 0.35,
       key: { color: "#E8DED0", position: [3, 4, 2], intensity: 2.4 },
@@ -21,7 +19,6 @@ export const landmarkSlots = {
     },
   },
   "bab-al-yemen": {
-    modelPath: null,
     lights: {
       ambient: 0.5,
       key: { color: "#E8DED0", position: [4, 6, 3], intensity: 2 },
@@ -29,7 +26,6 @@ export const landmarkSlots = {
     },
   },
   "dar-al-hajar": {
-    modelPath: null,
     lights: {
       ambient: 0.55,
       key: { color: "#E8DED0", position: [-4, 6, 3], intensity: 2.2 },
@@ -80,7 +76,7 @@ export type CameraStop = {
 };
 
 export type CameraTimeline = {
-  wide: readonly CameraStop[];
-  compact: readonly CameraStop[];
+  wide: readonly [CameraStop, ...CameraStop[]];
+  compact: readonly [CameraStop, ...CameraStop[]];
   reducedMotionFrame: CameraStop;
 };

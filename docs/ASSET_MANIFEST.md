@@ -22,3 +22,9 @@ The owner supplied five concept images. Capture their role here so future sessio
 - **Bab Al-Yemen.** Use the studio diorama for material and framing direction. Verify towers, gateway width, windows and ornament against documentary sources before building production geometry.
 
 The working copy contains the optimized ibex derivative and the generated highlands plate. Archive the original reference files and confirm source/rights with the owner before publishing the final assets.
+
+## Phase 02 coffee studies pending approval
+
+Two sculpted review candidates are stored in [assets/coffee-review](../assets/coffee-review/README.md). The input maps are generated relief interpretations of owner-supplied concept references. Blender displaces the mesh itself and applies a separate roasted PBR color texture. The underlying building details are an artistic interpretation and need documentary verification. Both files and their fallback renders are for local review. Full standalone Ibex, Bab Al-Yemen, Dar Al-Hajar and Socotra tree models are pending source material and usage approval.
+
+For the standalone Socotra specimen, gather whole-canopy, branch junction, trunk and leaf-rosette views with scale or botanical measurements. Verify the umbrella crown and branching structure against qualified botanical references. The relief sketch cannot determine a full 360-degree specimen.

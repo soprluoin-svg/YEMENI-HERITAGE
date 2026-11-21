@@ -41,6 +41,18 @@ type ExhibitionCopy = {
     explore: string;
     scroll: string;
   };
+  preview: {
+    caption: string;
+    open: string;
+    close: string;
+    loading: string;
+    failed: string;
+    coffeeReview: string;
+    tree: string;
+    palace: string;
+    rotate: string;
+    float: string;
+  };
   placeholder: string;
   heroPlaceholder: string;
   ibexImageDescription: string;
@@ -77,6 +89,18 @@ export const exhibitionCopy = {
       emphasis: "in Motion.",
       explore: "Explore the exhibition",
       scroll: "Scroll to explore",
+    },
+    preview: {
+      caption: "Exhibition model",
+      coffeeReview: "Sculpted coffee studies · Awaiting review",
+      tree: "Dragon Blood Tree",
+      palace: "Dar Al-Hajar",
+      rotate: "Rotate",
+      float: "Float",
+      open: "View in 3D",
+      close: "Close 3D view",
+      loading: "Loading 3D view…",
+      failed: "The 3D view is unavailable. The static view is still available.",
     },
     placeholder: "3D asset pending",
     heroPlaceholder: "Ibex reference · 3D model pending",
@@ -139,6 +163,18 @@ export const exhibitionCopy = {
       emphasis: "ينبض بالحركة.",
       explore: "استكشف المعرض",
       scroll: "مرّر لاستكشاف المعرض",
+    },
+    preview: {
+      caption: "نموذج المعرض",
+      coffeeReview: "دراسات منحوتة لحبّتَي القهوة · بانتظار المراجعة",
+      tree: "شجرة دم الأخوين",
+      palace: "دار الحجر",
+      rotate: "دوّر",
+      float: "التعويم",
+      open: "اعرض النموذج الثلاثي الأبعاد",
+      close: "أغلق العرض الثلاثي الأبعاد",
+      loading: "جارٍ تحميل العرض الثلاثي الأبعاد…",
+      failed: "تعذّر تشغيل العرض الثلاثي الأبعاد. العرض الثابت متاح.",
     },
     placeholder: "النموذج الثلاثي الأبعاد قيد الإعداد",
     heroPlaceholder: "صورة مرجعية للوعل · النموذج قيد الإعداد",

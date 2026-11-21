@@ -1,0 +1,16 @@
+{
+  "dragon-blood-tree": {
+    "triangles": 14152,
+    "vertices": 7078,
+    "relief_peak_model_units": 0.08306,
+    "displaced_vertices": 708,
+    "encoded_bytes": 336056
+  },
+  "dar-al-hajar": {
+    "triangles": 14152,
+    "vertices": 7078,
+    "relief_peak_model_units": 0.0925,
+    "displaced_vertices": 1101,
+    "encoded_bytes": 335152
+  }
+}
