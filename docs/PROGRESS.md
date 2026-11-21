@@ -10,3 +10,4 @@ Phase 01 started from the existing main history. Governance and the task backlog
 - Ran axe WCAG 2.0/2.1 A and AA rules in Chromium at 1440 and 390 CSS pixels for each locale. The automated checks reported no violations. Inspected both localized renderings at desktop and mobile sizes.
 - Confirmed the GSAP chunk was absent on the initial desktop load, arrived after scrolling and initialized reveals. Coffee motion respected a live reduced-motion preference change. Checked the locale switch and a 404 for an unsupported locale.
 - Cold local production transfer at 1440 CSS pixels was 143 KiB of initial JavaScript plus 146 KiB across both opening images, within the Phase 01 budgets. Field Web Vitals and physical devices remain unmeasured.
+- Pushed the dedicated review branch to GitHub. Pull request creation is blocked in this environment because the GitHub GraphQL request returned Forbidden. The GitHub review link is in HANDOFF.md.
